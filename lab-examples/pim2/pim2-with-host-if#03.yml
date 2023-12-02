@@ -1,0 +1,109 @@
+name: pim2
+prefix: ""
+
+topology:
+  nodes:
+    R1:
+      kind: linux
+      image: frr
+      binds:
+        - daemons:/etc/frr/daemons
+        - frr1.conf:/etc/frr/frr.conf
+      sysctls:
+        net.ipv6.conf.all.forwarding: 1
+        net.ipv6.conf.all.disable_ipv6: 0
+        net.ipv6.conf.default.forwarding: 1
+        net.ipv6.conf.default.disable_ipv6: 0
+      exec:
+        - /usr/lib/frr/frr start
+
+    R2:
+      kind: linux
+      image: frr
+      binds:
+        - daemons:/etc/frr/daemons
+        - frr2.conf:/etc/frr/frr.conf
+      sysctls:
+        net.ipv6.conf.all.forwarding: 1
+        net.ipv6.conf.all.disable_ipv6: 0
+        net.ipv6.conf.default.forwarding: 1
+        net.ipv6.conf.default.disable_ipv6: 0
+      exec:
+        - /usr/lib/frr/frr start
+
+    R3:
+      kind: linux
+      image: frr
+      binds:
+        - daemons:/etc/frr/daemons
+        - frr3.conf:/etc/frr/frr.conf
+      sysctls:
+        net.ipv6.conf.all.forwarding: 1
+        net.ipv6.conf.all.disable_ipv6: 0
+        net.ipv6.conf.default.forwarding: 1
+        net.ipv6.conf.default.disable_ipv6: 0
+      exec:
+        - /usr/lib/frr/frr start
+
+    R4:
+      kind: linux
+      image: frr
+      sysctls:
+        net.ipv6.conf.all.forwarding: 1
+        net.ipv6.conf.all.disable_ipv6: 0
+        net.ipv6.conf.default.forwarding: 1
+        net.ipv6.conf.default.disable_ipv6: 0
+#      exec:
+#        - ip addr add 10.0.0.10/30 dev net0
+#        - ip route del default
+#        - ip route add default via 10.0.0.9
+
+    R5:
+      kind: linux
+      image: frr
+      sysctls:
+        net.ipv6.conf.all.forwarding: 1
+        net.ipv6.conf.all.disable_ipv6: 0
+        net.ipv6.conf.default.forwarding: 1
+        net.ipv6.conf.default.disable_ipv6: 0
+      exec:
+        - ip addr add 10.0.0.14/30 dev net0
+        - ip route del default
+        - ip route add default via 10.0.0.13
+
+    R6:
+      kind: linux
+      image: frr
+      sysctls:
+        net.ipv6.conf.all.forwarding: 1
+        net.ipv6.conf.all.disable_ipv6: 0
+        net.ipv6.conf.default.forwarding: 1
+        net.ipv6.conf.default.disable_ipv6: 0
+      exec:
+        - ip addr add 10.0.0.18/30 dev net0
+        - ip route del default
+        - ip route add default via 10.0.0.17
+
+    R7:
+      kind: linux
+      image: frr
+      sysctls:
+        net.ipv6.conf.all.forwarding: 1
+        net.ipv6.conf.all.disable_ipv6: 0
+        net.ipv6.conf.default.forwarding: 1
+        net.ipv6.conf.default.disable_ipv6: 0
+#      exec:
+#        - ip addr add 10.0.0.22/30 dev net0
+#        - ip route del default
+#        - ip route add default via 10.0.0.21
+
+  links:
+    - endpoints: ["R1:net0", "R2:net0"]
+    - endpoints: ["R1:net1", "R3:net0"]
+#    - endpoints: ["R2:net1", "R4:net0"]
+#    - endpoints: ["R2:net1", "macvlan:enxd8eb97bd7459"]
+    - endpoints: ["R2:net1", "macvlan:vboxnet0"]
+    - endpoints: ["R2:net2", "R5:net0"]
+    - endpoints: ["R3:net1", "R6:net0"]
+#    - endpoints: ["R3:net2", "R7:net0"]
+    - endpoints: ["R3:net2", "macvlan:vboxnet1"]
