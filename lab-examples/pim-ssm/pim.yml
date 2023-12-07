@@ -2,6 +2,12 @@ name: pim3
 prefix: ""
 
 topology:
+  defaults:
+    sysctls:
+      net.ipv6.conf.all.forwarding: 1
+      net.ipv6.conf.all.disable_ipv6: 0
+      net.ipv6.conf.default.forwarding: 1
+      net.ipv6.conf.default.disable_ipv6: 0
   nodes:
     R1:
       kind: linux
@@ -9,11 +15,6 @@ topology:
       binds:
         - daemons:/etc/frr/daemons
         - frr1.conf:/etc/frr/frr.conf
-      sysctls:
-        net.ipv6.conf.all.forwarding: 1
-        net.ipv6.conf.all.disable_ipv6: 0
-        net.ipv6.conf.default.forwarding: 1
-        net.ipv6.conf.default.disable_ipv6: 0
       exec:
         - sudo sudo /usr/lib/frr/frrinit.sh start
 
@@ -23,11 +24,6 @@ topology:
       binds:
         - daemons:/etc/frr/daemons
         - frr2.conf:/etc/frr/frr.conf
-      sysctls:
-        net.ipv6.conf.all.forwarding: 1
-        net.ipv6.conf.all.disable_ipv6: 0
-        net.ipv6.conf.default.forwarding: 1
-        net.ipv6.conf.default.disable_ipv6: 0
       exec:
         - sudo /usr/lib/frr/frrinit.sh start
 
@@ -37,23 +33,12 @@ topology:
       binds:
         - daemons:/etc/frr/daemons
         - frr3.conf:/etc/frr/frr.conf
-      sysctls:
-        net.ipv6.conf.all.forwarding: 1
-        net.ipv6.conf.all.disable_ipv6: 0
-        net.ipv6.conf.default.forwarding: 1
-        net.ipv6.conf.default.disable_ipv6: 0
       exec:
         - sudo /usr/lib/frr/frrinit.sh start
 
     R4:
       kind: linux
       image: frr-ubuntu22
-      #image: frr
-      sysctls:
-        net.ipv6.conf.all.forwarding: 1
-        net.ipv6.conf.all.disable_ipv6: 0
-        net.ipv6.conf.default.forwarding: 1
-        net.ipv6.conf.default.disable_ipv6: 0
       exec:
         - ip addr add 10.0.3.2/24 dev net0
         - ip route del default
@@ -64,13 +49,7 @@ topology:
 
     R5:
       kind: linux
-      #image: frr
       image: frr-ubuntu22
-      sysctls:
-        net.ipv6.conf.all.forwarding: 1
-        net.ipv6.conf.all.disable_ipv6: 0
-        net.ipv6.conf.default.forwarding: 1
-        net.ipv6.conf.default.disable_ipv6: 0
       exec:
         - ip addr add 10.0.4.2/24 dev net0
         - ip route del default
@@ -82,12 +61,6 @@ topology:
     R6:
       kind: linux
       image: frr-ubuntu22
-      #image: frr
-      sysctls:
-        net.ipv6.conf.all.forwarding: 1
-        net.ipv6.conf.all.disable_ipv6: 0
-        net.ipv6.conf.default.forwarding: 1
-        net.ipv6.conf.default.disable_ipv6: 0
       exec:
         - ip addr add 10.0.5.2/24 dev net0
         - ip route del default
@@ -99,12 +72,6 @@ topology:
     R7:
       kind: linux
       image: frr-ubuntu22
-      #image: frr
-      sysctls:
-        net.ipv6.conf.all.forwarding: 1
-        net.ipv6.conf.all.disable_ipv6: 0
-        net.ipv6.conf.default.forwarding: 1
-        net.ipv6.conf.default.disable_ipv6: 0
       exec:
         - ip addr add 10.0.6.2/24 dev net0
         - ip route del default
