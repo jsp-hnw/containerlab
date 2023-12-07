@@ -17,12 +17,12 @@
 zebra=yes
 bgpd=no
 ospfd=yes
-ospf6d=no
+ospf6d=yes
 ripd=no
 ripngd=no
 isisd=no
 pimd=yes
-pim6d=no
+pim6d=yes
 ldpd=yes
 nhrpd=no
 eigrpd=no

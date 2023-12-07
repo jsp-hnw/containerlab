@@ -55,9 +55,12 @@ topology:
         net.ipv6.conf.default.forwarding: 1
         net.ipv6.conf.default.disable_ipv6: 0
       exec:
-        - ip addr add 10.0.0.10/30 dev net0
+        - ip addr add 10.0.3.2/24 dev net0
         - ip route del default
-        - ip route add default via 10.0.0.9
+        - ip route add default via 10.0.3.1
+        - ip addr add 3003::2/64 dev net0
+        - ip -6 route del default
+        - ip -6 route add default via 3003::1
 
     R5:
       kind: linux
@@ -69,9 +72,12 @@ topology:
         net.ipv6.conf.default.forwarding: 1
         net.ipv6.conf.default.disable_ipv6: 0
       exec:
-        - ip addr add 10.0.0.14/30 dev net0
+        - ip addr add 10.0.4.2/24 dev net0
         - ip route del default
-        - ip route add default via 10.0.0.13
+        - ip route add default via 10.0.4.1
+        - ip addr add 3004::2/64 dev net0
+        - ip -6 route del default
+        - ip -6 route add default via 3004::1
 
     R6:
       kind: linux
@@ -83,9 +89,12 @@ topology:
         net.ipv6.conf.default.forwarding: 1
         net.ipv6.conf.default.disable_ipv6: 0
       exec:
-        - ip addr add 10.0.0.18/30 dev net0
+        - ip addr add 10.0.5.2/24 dev net0
         - ip route del default
-        - ip route add default via 10.0.0.17
+        - ip route add default via 10.0.5.1
+        - ip addr add 3005::2/64 dev net0
+        - ip -6 route del default
+        - ip -6 route add default via 3005::1
 
     R7:
       kind: linux
@@ -97,9 +106,12 @@ topology:
         net.ipv6.conf.default.forwarding: 1
         net.ipv6.conf.default.disable_ipv6: 0
       exec:
-        - ip addr add 10.0.0.22/30 dev net0
+        - ip addr add 10.0.6.2/24 dev net0
         - ip route del default
-        - ip route add default via 10.0.0.21
+        - ip route add default via 10.0.6.1
+        - ip addr add 3006::2/64 dev net0
+        - ip -6 route del default
+        - ip -6 route add default via 3006::1
 
   links:
     - endpoints: ["R1:net0", "R2:net0"]
