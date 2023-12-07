@@ -36,16 +36,16 @@ topology:
       exec:
         - sudo /usr/lib/frr/frrinit.sh start
 
-    R4:
-      kind: linux
-      image: frr-ubuntu22
-      exec:
-        - ip addr add 10.0.3.2/24 dev net0
-        - ip route del default
-        - ip route add default via 10.0.3.1
-        - ip addr add 3003::2/64 dev net0
-        - ip -6 route del default
-        - ip -6 route add default via 3003::1
+    # R4:
+    #   kind: linux
+    #   image: frr-ubuntu22
+    #   exec:
+    #     - ip addr add 10.0.3.2/24 dev net0
+    #     - ip route del default
+    #     - ip route add default via 10.0.3.1
+    #     - ip addr add 3003::2/64 dev net0
+    #     - ip -6 route del default
+    #     - ip -6 route add default via 3003::1
 
     R5:
       kind: linux
@@ -69,21 +69,25 @@ topology:
         - ip -6 route del default
         - ip -6 route add default via 3005::1
 
-    R7:
-      kind: linux
-      image: frr-ubuntu22
-      exec:
-        - ip addr add 10.0.6.2/24 dev net0
-        - ip route del default
-        - ip route add default via 10.0.6.1
-        - ip addr add 3006::2/64 dev net0
-        - ip -6 route del default
-        - ip -6 route add default via 3006::1
+    # R7:
+    #   kind: linux
+    #   image: frr-ubuntu22
+    #   exec:
+    #     - ip addr add 10.0.6.2/24 dev net0
+    #     - ip route del default
+    #     - ip route add default via 10.0.6.1
+    #     - ip addr add 3006::2/64 dev net0
+    #     - ip -6 route del default
+    #     - ip -6 route add default via 3006::1
 
   links:
     - endpoints: ["R1:net0", "R2:net0"]
     - endpoints: ["R1:net1", "R3:net0"]
-    - endpoints: ["R2:net1", "R4:net0"]
+#    - endpoints: ["R2:net1", "R4:net0"]
+#    - endpoints: ["R2:net1", "macvlan:enxd8eb97bd7459"]
+    - endpoints: ["R2:net1", "macvlan:vboxnet0"]
     - endpoints: ["R2:net2", "R5:net0"]
     - endpoints: ["R3:net1", "R6:net0"]
-    - endpoints: ["R3:net2", "R7:net0"]
+#    - endpoints: ["R3:net2", "R7:net0"]
+#    - endpoints: ["R3:net2", "macvlan:enx7cc2c628a5b2"]
+    - endpoints: ["R3:net2", "macvlan:vboxnet1"]
