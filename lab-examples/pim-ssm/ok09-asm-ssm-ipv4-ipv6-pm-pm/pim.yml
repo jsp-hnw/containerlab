@@ -88,8 +88,9 @@ topology:
 #    - endpoints: ["R2:net2", "R5:net0"]
     - endpoints: ["R2:net2", "macvlan:veth25"]
 #    - endpoints: ["R3:net1", "R6:net0"]
-#    - endpoints: ["R3:net1", "macvlan:vboxnet2"]
-    - endpoints: ["R3:net1", "macvlan:enx7cc2c628a5b2"]
-#    - endpoints: ["R3:net2", "R7:net0"]
-#    - endpoints: ["R3:net2", "macvlan:vboxnet3"]
-    - endpoints: ["R3:net2", "macvlan:enxd8eb97bd7459"]
+# fjord host
+    - endpoints: ["R3:net1", "macvlan:enp2s0f0"]
+    - endpoints: ["R3:net2", "macvlan:enp2s0f1"]
+# bizet host
+#    - endpoints: ["R3:net1", "macvlan:enx7cc2c628a5b2"]
+#    - endpoints: ["R3:net2", "macvlan:enxd8eb97bd7459"]
